@@ -1,18 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
-/* 漢堡選單樣式 */
-#menu-icon {
-  font-size: 3.6rem;
-  color: #ddd;
-  display: none;
-  cursor: pointer;
-}
-
-/* 手機版顯示漢堡 */
-@media(max-width:995px) {
-  #menu-icon {
-    display: block;
-  }
-}
 
 *{
     margin: 0;

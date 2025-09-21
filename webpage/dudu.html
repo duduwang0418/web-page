@@ -9,8 +9,143 @@
     <title>Portfolio Website</title>
 </head>
 <body>
+    <style>
+        body {
+          margin: 0;
+          font-family: Arial, sans-serif;
+          background: black;
+          color: white;
+        }
+    
+        /* 頂部導覽列 */
+        .navbar {
+          display: flex;
+          align-items: center;
+          padding: 10px 20px;
+          background: black;
+        }
+    
+        .logo {
+          font-size: 50px;
+          font-weight: bold;
+          margin-left: 10px;
+        }
+    
+        /* 漢堡選單按鈕 */
+        .menu-toggle {
+          display: inline-block;
+          cursor: pointer;
+          padding: 10px;
+          background: black;
+          border: 1px solid white;
+          border-radius: 6px;
+        }
+    
+        .menu-toggle div {
+          width: 25px;
+          height: 3px;
+          background: white;
+          margin: 5px 0;
+          transition: 0.4s;
+        }
+    
+        /* 變成 X 狀態 */
+        .menu-toggle.change .bar1 {
+          transform: rotate(-45deg) translate(-5px, 6px);
+        }
+    
+        .menu-toggle.change .bar2 {
+          opacity: 0;
+        }
+    
+        .menu-toggle.change .bar3 {
+          transform: rotate(45deg) translate(-5px, -6px);
+        }
+    
+        /* 下拉選單 */
+        .dropdown {
+          display: none;
+          margin-top: 10px;
+          border: 1px solid white;
+          background: black;
+          border-radius: 6px;
+          padding: 10px;
+          width: 150px;
+    
+          /* 動畫效果 */
+          opacity: 0;
+          transform: translateY(-10px);
+          transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+    
+        .dropdown a {
+          display: block;
+          text-decoration: none;
+          color: white;
+          padding: 8px;
+        }
+    
+        .dropdown a:hover {
+          background: #333;
+        }
+    
+        /* 顯示選單 */
+        .dropdown.show {
+          display: block;
+          opacity: 1;
+          transform: translateY(0);
+        }
+      </style>
+    </head>
+    <body>
+    
+      <!-- 導覽列 -->
+      <div class="navbar">
+        <!-- 漢堡選單 -->
+        <div class="menu-toggle" id="menuBtn" onclick="toggleMenu(event)">
+          <div class="bar1"></div>
+          <div class="bar2"></div>
+          <div class="bar3"></div>
+        </div>
+    
+        <!-- Logo -->
+        
+        <!--poor html...>
+      <!-- 下拉選單 -->
+      <div class="dropdown" id="dropdownMenu">
+        <a href="#">首頁</a>
+        <a href="#">自我介紹</a>
+        <a href="#">商店</a>
+        <a href="#">登入</a>
+        <a href="#">原代碼出處</a>
+        <a href="#">這是為手機設計的</a>
+      </div>
+    
+      <script>
+        function toggleMenu(event) {
+          event.stopPropagation();
+          const menuBtn = document.getElementById("menuBtn");
+          const menu = document.getElementById("dropdownMenu");
+    
+          menuBtn.classList.toggle("change");
+          menu.classList.toggle("show");
+        }
+    
+        // 點擊空白處時自動收起
+        document.addEventListener("click", function(e) {
+          const menuBtn = document.getElementById("menuBtn");
+          const menu = document.getElementById("dropdownMenu");
+    
+          if (menu.classList.contains("show") && !menu.contains(e.target) && !menuBtn.contains(e.target)) {
+            menu.classList.remove("show");
+            menuBtn.classList.remove("change");
+          }
+        });
+      </script>
+
+
+
     <header>
-        <i class="fa-solid fa-bars" id="menu-icon"></i>
         <a href="#" class="logo">Dudu</a>
 
         <nav>
@@ -39,137 +174,5 @@
             <a href="https://www.instagram.com/wang._.0418/" class="btn">Help you</a>
         </div>
     </section>
-    <style>
-        body {
-          margin: 0;
-          font-family: Arial, sans-serif;
-          background: black;
-          color: white;
-        }
-    
-        nav {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 15px 20px;
-          background: black;
-        }
-    
-        /* 左邊區域 */
-        .left-menu {
-          display: flex;
-          align-items: center;
-          gap: 20px;
-        }
-    
-        .logo {
-          font-size: 20px;
-          font-weight: bold;
-        }
-    
-        /* 下拉選單 */
-        .dropdown {
-          position: relative;
-        }
-    
-        .dropbtn {
-          background: none;
-          border: none;
-          color: white;
-          font-size: 18px;
-          cursor: pointer;
-        }
-    
-        .dropdown-content {
-          display: none;
-          position: absolute;
-          top: 100%;
-          left: 0;
-          background-color: white; /* 白色底 */
-          min-width: 160px;
-          box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-          z-index: 1;
-        }
-    
-        .dropdown-content a {
-          color: black; /* 黑色字 */
-          padding: 12px 16px;
-          text-decoration: none;
-          display: block;
-        }
-    
-        .dropdown-content a:hover {
-          background-color: #f1f1f1; /* hover 灰底 */
-        }
-    
-        .dropdown.show .dropdown-content {
-          display: block;
-        }
-    
-        /* 右邊選單 */
-        .right-menu a {
-          margin: 0 15px;
-          text-decoration: none;
-          color: white;
-          font-size: 16px;
-          position: relative;
-        }
-    
-        .right-menu a::after {
-          content: "";
-          position: absolute;
-          left: 0;
-          bottom: -5px;
-          width: 0;
-          height: 2px;
-          background: white;
-          transition: 0.3s;
-        }
-    
-        .right-menu a:hover::after,
-        .right-menu a.active::after {
-          width: 100%;
-        }
-    
-        /* 手機響應式 */
-        @media (max-width: 768px) {
-          nav {
-            flex-direction: column;
-            align-items: flex-start;
-          }
-          .right-menu {
-            margin-top: 10px;
-          }
-        }
-      </style>
-    </head>
-    <body>
-      <nav>
-        <!-- 左邊區塊 -->
-        <div class="left-menu">
-          <div class="logo">Dudu</div>
-          <div class="dropdown">
-            <button class="dropbtn" onclick="toggleDropdown()">☰ 選單</button>
-            <div class="dropdown-content">
-              <a href="#">子選項 1</a>
-              <a href="#">子選項 2</a>
-              <a href="#">子選項 3</a>
-            </div>
-          </div>
-        </div>
-        <script>
-            function toggleDropdown() {
-              document.querySelector(".dropdown").classList.toggle("show");
-            }
-        
-            // 點擊外面區域自動關閉
-            window.onclick = function(event) {
-              if (!event.target.matches('.dropbtn')) {
-                document.querySelectorAll(".dropdown").forEach(drop => {
-                  drop.classList.remove("show");
-                });
-              }
-            }
-          </script>
 </body>
 </html>
